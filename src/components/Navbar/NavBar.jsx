@@ -1,11 +1,11 @@
   import React, { useState } from "react";
 import "./buttons.css";
-import "./Navbar_New.css";
+import "./NavbarNew.css";
 import Logo from "../assets/logo.png";
 import { FaSearch } from "react-icons/fa";
 import { LuCircleArrowOutDownLeft } from "react-icons/lu";
 import { NavLink, useNavigate } from "react-router-dom";
-import Products from "./Products";
+// import Products from "./Products";
 
 const NavBar_Footer = () => {
   const ScrollToTop = () => {
@@ -38,18 +38,18 @@ const NavBar_Footer = () => {
 
 
   //Search
-  const [searchQuery, setSearchQuery] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  // const [searchQuery, setSearchQuery] = useState("");
+  // const [showSearch, setShowSearch] = useState(false);
+  // const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const handleSearch = () => {
-    if (searchQuery.trim() !== "") {
-      const results = Products.filter((product) =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredProducts(results);
-    }
-  };
+  // const handleSearch = () => {
+  //   if (searchQuery.trim() !== "") {
+  //     const results = Products.filter((product) =>
+  //       product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  //     );
+  //     setFilteredProducts(results);
+  //   }
+  // };
 
   return (
     <>
@@ -136,7 +136,7 @@ const NavBar_Footer = () => {
             </NavLink>
 
             <a
-              href="#"
+              href="/#"
               onClick={(e) => {
                 e.preventDefault();
                 setShowModal(true);
@@ -307,7 +307,7 @@ const NavBar_Footer = () => {
             </NavLink>
 
             <a
-              href="#"
+              href="/#"
               onClick={(e) => {
                 e.preventDefault();
                 setShowModal(true);

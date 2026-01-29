@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Footer from "./Footer/Footer";
 import { Outlet } from "react-router-dom";
-import NavBar_New from "./Navbar/NavBar_New";
+import NavbarNew from "./Navbar/NavBar";
 import "./Layout.css";
 
 const Layout = () => {
@@ -70,7 +70,7 @@ const Layout = () => {
 
   return (
     <>
-      <NavBar_New />
+      <NavbarNew />
       <Outlet />
       <Footer />
 

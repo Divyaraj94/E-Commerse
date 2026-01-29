@@ -14,9 +14,10 @@ import CategoryProducts from "./CategoryProducts";
 // Import API calls
 import { fetchProducts, fetchCategories } from "../API/index";
 
-const EcommerceLayout = () => {
+const CorporateCollection = () => {
   const [categories, setCategories] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(0); // "All" by default
 
   const [priceRange, setPriceRange] = useState(7000);
@@ -28,43 +29,52 @@ const EcommerceLayout = () => {
   const [isCartVisible, setIsCartVisible] = useState(false); // For mobile cart
 
   // Toggle functions
-  const toggleCart = () => setIsCartVisible(!isCartVisible);
+  // const toggleCart = () => setIsCartVisible(!isCartVisible);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   // Fetch data
-  useEffect(() => {
-    const fetchData = async () => {
-      const products = await fetchProducts();
-      const categoriesData = await fetchCategories(products);
-      setAllProducts(products);
-      setCategories(categoriesData);
-    };
-    fetchData();
-  }, []);
+useEffect(() => {
+  const fetchData = async () => {
+    const products = await fetchProducts();
+    const categoriesData = await fetchCategories(products);
+
+    setAllProducts(products);        // original data
+    setDisplayProducts(products);    // shown data
+    setCategories(categoriesData);
+  };
+
+  fetchData();
+}, []);
+
 
   // Sorting logic
-  useEffect(() => {
-    if (!allProducts || allProducts.length === 0) return;
+useEffect(() => {
+  if (!allProducts.length) return;
 
-    const sortedProducts = [...allProducts];
-    switch (sortOption) {
-      case "az":
-        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case "za":
-        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      case "lowToHigh":
-        sortedProducts.sort((a, b) => a.price - b.price);
-        break;
-      case "highToLow":
-        sortedProducts.sort((a, b) => b.price - a.price);
-        break;
-      default:
-        break;
-    }
-    setAllProducts(sortedProducts);
-  }, [sortOption]);
+  let sorted = [...allProducts];
+
+  switch (sortOption) {
+    case "az":
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case "za":
+      sorted.sort((a, b) => b.name.localeCompare(a.name));
+      break;
+    case "lowToHigh":
+      sorted.sort((a, b) => a.price - b.price);
+      break;
+    case "highToLow":
+      sorted.sort((a, b) => b.price - a.price);
+      break;
+    default:
+      break;
+  }
+
+  setDisplayProducts(sorted);
+}, [sortOption, allProducts]);
+
+
+  
 
   const handleCategorySelect = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -126,7 +136,7 @@ const EcommerceLayout = () => {
         <PromosSection />
         <BestSellers onAddToCart={onAddToCart} />
         <CategoryProducts
-          products={allProducts}
+          products={displayProducts}
           selectedCategory={selectedCategory}
           onAddToCart={onAddToCart}
         />
@@ -207,4 +217,4 @@ const EcommerceLayout = () => {
   );
 };
 
-export default EcommerceLayout;
+export default CorporateCollection;
