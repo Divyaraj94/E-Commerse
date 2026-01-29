@@ -75,7 +75,7 @@ const Layout = () => {
       <Footer />
 
       <a
-        href="#"
+        href="/#"
         className={`whatsapp-btn2 ${isDragging ? "dragging" : ""}`}
         ref={buttonRef}
         style={{ left: `${position.x}px`, top: `${position.y}px` }}

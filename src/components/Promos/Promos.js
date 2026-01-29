@@ -45,7 +45,7 @@ const Promos = () => {
     }, 3000); // Auto-slide every 3 seconds
 
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  });
 
   const handleNextSlide = () => {
     setIsSliding(true);
